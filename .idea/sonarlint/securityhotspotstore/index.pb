@@ -9,3 +9,7 @@ M
 contracts/profit-sharing.clar,6/6/66648ca14ef9075e29ebea9f7cb571dfcdf61a0a
 L
 tests/profit-sharing.test.ts,c/7/c79661f1cb04e83e5d8854a121ba139ad5709e25
+D
+contracts/usage.clar,8/5/85884eec26da0e29c9f87cadb6afdc7cb9507338
+C
+tests/usage.test.ts,9/c/9ccc9bee726b41d6da4cab98db54752839d3830a
