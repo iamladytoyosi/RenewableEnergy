@@ -7,3 +7,5 @@ H
 tests/investment.test.ts,c/3/c38b310711d1f7a8778b7963c14c8b6b1535d20f
 M
 contracts/profit-sharing.clar,6/6/66648ca14ef9075e29ebea9f7cb571dfcdf61a0a
+L
+tests/profit-sharing.test.ts,c/7/c79661f1cb04e83e5d8854a121ba139ad5709e25
