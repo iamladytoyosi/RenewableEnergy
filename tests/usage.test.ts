@@ -1,21 +1,38 @@
-
-import { describe, expect, it } from "vitest";
-
-const accounts = simnet.getAccounts();
-const address1 = accounts.get("wallet_1")!;
-
-/*
-  The test below is an example. To learn more, read the testing documentation here:
-  https://docs.hiro.so/stacks/clarinet-js-sdk
-*/
-
-describe("example tests", () => {
-  it("ensures simnet is well initalised", () => {
-    expect(simnet.blockHeight).toBeDefined();
+describe('Usage and Distribution Ledger Contract', () => {
+  let chain: Chain;
+  let accounts: { [key: string]: Account };
+  
+  beforeAll(() => {
+    chain = new Chain();
+    accounts = chain.accounts;
   });
-
-  // it("shows an example", () => {
-  //   const { result } = simnet.callReadOnlyFn("counter", "get-counter", [], address1);
-  //   expect(result).toBeUint(0);
-  // });
+  
+  it('should record energy usage for an account', () => {
+    const account = accounts['investor1'];
+    const block = chain.mineBlock([
+      Tx.contractCall(
+          'usage-ledger',
+          'record-usage',
+          [account.address, 50], // 50 units of energy usage
+          account.address
+      ),
+    ]);
+    const receipt = block.receipts[0];
+    expect(receipt.result).toBeOk();
+    expect(receipt.result).toEqual('(ok 50)');
+  });
+  
+  it('should distribute energy units based on usage', () => {
+    const block = chain.mineBlock([
+      Tx.contractCall(
+          'usage-ledger',
+          'distribute-energy-units',
+          [],
+          accounts['owner'].address
+      ),
+    ]);
+    const receipt = block.receipts[0];
+    expect(receipt.result).toBeOk();
+    expect(receipt.result).toEqual('(ok "Units distributed")');
+  });
 });
